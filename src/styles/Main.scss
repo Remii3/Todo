@@ -1,0 +1,44 @@
+.inputInfo {
+  height: 25%;
+  flex-basis: 25%;
+  background-color: lightblue;
+}
+.finishedTasks {
+  height: 50%;
+  width: 500px;
+  flex-basis: 15%;
+  background-color: lightgreen;
+  overflow-y: scroll;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(0, -50%);
+}
+.normalTasks {
+  height: 50%;
+  width: 500px;
+  flex-basis: 15%;
+  background-color: lightcoral;
+  overflow-y: scroll;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-120%, -50%);
+}
+.importantTasks {
+  height: 50%;
+  flex-basis: 15%;
+  background-color: lightpink;
+  overflow-y: scroll;
+}
+section {
+  display: flex;
+  flex-wrap: 1;
+  flex-grow: 1;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.normalTasks ul {
+  padding: 0 10px;
+}

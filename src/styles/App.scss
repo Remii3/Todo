@@ -1,0 +1,25 @@
+$test: center;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0 auto;
+  background-color: #ddd;
+  color: #222;
+}
+
+header {
+  flex-basis: 5vh;
+  background-color: black;
+}
+main {
+  flex-grow: 1;
+}
+
+footer {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #555;
+  color: white;
+  text-transform: uppercase;
+}
