@@ -1,6 +1,6 @@
 import "../styles/Main.scss";
 import React, { Component } from "react";
-import TaskList from "../components/TaskList";
+import { TaskList, ImportantTaskList } from "../components/TaskList";
 import FinishedTasksList from "../components/FinishedTasksList";
 
 class Main extends Component {
@@ -9,13 +9,20 @@ class Main extends Component {
     currentTitle: "",
     currentDescription: "",
     currentDate: "",
-    tasks: [],
+    tasks: { normalTasks: [], importantTasks: [] },
     finishedTasks: [],
+    importantTask: false,
   };
 
   handleSubmit = (e) => {
-    const { currentId, currentTitle, currentDescription, currentDate, tasks } =
-      this.state;
+    const {
+      currentId,
+      currentTitle,
+      currentDescription,
+      currentDate,
+      tasks,
+      importantTask,
+    } = this.state;
     e.preventDefault();
     const task = {
       id: currentId,
@@ -23,11 +30,24 @@ class Main extends Component {
       description: currentDescription,
       date: currentDate,
     };
-
-    this.setState({
-      tasks: [...tasks, task],
-      currentId: this.state.currentId + 1,
-    });
+    if (importantTask === false) {
+      this.setState((prevState) => ({
+        tasks: {
+          ...prevState.tasks,
+          normalTasks: [...tasks.normalTasks, task],
+        },
+        currentId: this.state.currentId + 1,
+      }));
+      console.log(this.state.tasks);
+    } else {
+      this.setState((prevState) => ({
+        tasks: {
+          ...prevState.tasks,
+          importantTasks: [...tasks.importantTasks, task],
+        },
+        currentId: this.state.currentId + 1,
+      }));
+    }
   };
 
   handleChange = (e) => {
@@ -40,14 +60,43 @@ class Main extends Component {
     } else {
       this.setState({ [name]: e.target.value });
     }
+    if (name === "importantTask" && e.target.checked) {
+      this.setState({ [name]: true });
+    } else if (name === "importantTask") {
+      this.setState({ [name]: false });
+    }
   };
 
-  finishTaskHandle = (id) => {
-    const clickedTask = this.state.tasks.findIndex((x) => x.id === id);
-    this.state.finishedTasks.push(this.state.tasks[clickedTask]);
-    this.setState({ finishedTasks: [...this.state.finishedTasks] });
-    this.state.tasks.splice(clickedTask, 1);
-    this.setState({ tasks: this.state.tasks });
+  finishTaskHandle = (id, recognizer) => {
+    if (recognizer === "FinishedNormalTask") {
+      const clickedTask = this.state.tasks.normalTasks.findIndex(
+        (x) => x.id === id
+      );
+      this.state.finishedTasks.push(this.state.tasks.normalTasks[clickedTask]);
+      this.setState({ finishedTasks: [...this.state.finishedTasks] });
+      this.state.tasks.normalTasks.splice(clickedTask, 1);
+      this.setState((prevState) => ({
+        tasks: {
+          ...prevState.tasks,
+          normalTasks: [...this.state.tasks.normalTasks],
+        },
+      }));
+    } else {
+      const clickedTask = this.state.tasks.importantTasks.findIndex(
+        (x) => x.id === id
+      );
+      this.state.finishedTasks.push(
+        this.state.tasks.importantTasks[clickedTask]
+      );
+      this.setState({ finishedTasks: [...this.state.finishedTasks] });
+      this.state.tasks.importantTasks.splice(clickedTask, 1);
+      this.setState((prevState) => ({
+        tasks: {
+          ...prevState.tasks,
+          importantTasks: [...this.state.tasks.importantTasks],
+        },
+      }));
+    }
   };
 
   deleteTaskHandle = (id, recognizer) => {
@@ -57,10 +106,28 @@ class Main extends Component {
       );
       this.state.finishedTasks.splice(clickedTask, 1);
       this.setState({ finishedTasks: this.state.finishedTasks });
+    } else if (recognizer === "notFinishedNormalTask") {
+      const clickedTask = this.state.tasks.normalTasks.findIndex(
+        (x) => x.id === id
+      );
+      this.state.tasks.normalTasks.splice(clickedTask, 1);
+      this.setState((prevState) => ({
+        tasks: {
+          ...prevState.tasks,
+          normalTasks: [...this.state.tasks.normalTasks],
+        },
+      }));
     } else {
-      const clickedTask = this.state.tasks.findIndex((x) => x.id === id);
-      this.state.tasks.splice(clickedTask, 1);
-      this.setState({ tasks: this.state.tasks });
+      const clickedTask = this.state.tasks.importantTasks.findIndex(
+        (x) => x.id === id
+      );
+      this.state.tasks.importantTasks.splice(clickedTask, 1);
+      this.setState((prevState) => ({
+        tasks: {
+          ...prevState.tasks,
+          importantTasks: [...this.state.tasks.importantTasks],
+        },
+      }));
     }
   };
 
@@ -97,6 +164,14 @@ class Main extends Component {
               />
             </label>
             <br />
+            <label>
+              Important
+              <input
+                name="importantTask"
+                type="checkbox"
+                onChange={this.handleChange}
+              />
+            </label>
             <button>Add</button>
           </div>
         </form>
@@ -114,7 +189,15 @@ class Main extends Component {
         </div>
         <div className="importantTasks">
           <h3>important tasks</h3>
-          <ul></ul>
+          <ul>
+            <ImportantTaskList
+              key="test2"
+              className="importantTaskList"
+              tasks={this.state.tasks}
+              finished={this.finishTaskHandle}
+              deleted={this.deleteTaskHandle}
+            />
+          </ul>
         </div>
         <div className="finishedTasks">
           <h3>Done tasks</h3>
