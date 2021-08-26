@@ -12,8 +12,16 @@ class Main extends Component {
     tasks: { normalTasks: [], importantTasks: [] },
     finishedTasks: [],
     importantTask: false,
+    sortDirection: false,
   };
 
+  sortingMethodNormal = React.createRef();
+  sortingMethodImportant = React.createRef();
+  sortingMethodFinished = React.createRef();
+
+  componentDidMount() {
+    this.setState({ sortDirection: true });
+  }
   handleSubmit = (e) => {
     const {
       currentId,
@@ -23,13 +31,16 @@ class Main extends Component {
       tasks,
       importantTask,
     } = this.state;
+
     e.preventDefault();
+
     const task = {
       id: currentId,
       title: currentTitle,
       description: currentDescription,
       date: currentDate,
     };
+
     if (importantTask === false) {
       this.setState((prevState) => ({
         tasks: {
@@ -38,7 +49,6 @@ class Main extends Component {
         },
         currentId: this.state.currentId + 1,
       }));
-      console.log(this.state.tasks);
     } else {
       this.setState((prevState) => ({
         tasks: {
@@ -138,7 +148,7 @@ class Main extends Component {
           <div className="inputInfo">
             <h1>Enter information</h1>
             <label>
-              Title:{" "}
+              <span>Title:</span>{" "}
               <input
                 name="currentTitle"
                 type="text"
@@ -147,7 +157,7 @@ class Main extends Component {
             </label>
             <br />
             <label>
-              Description:{" "}
+              <span>Description:</span>{" "}
               <input
                 name="currentDescription"
                 type="text"
@@ -156,7 +166,7 @@ class Main extends Component {
             </label>
             <br />
             <label>
-              Date:{" "}
+              <span>Date:</span>{" "}
               <input
                 name="currentDate"
                 type="datetime-local"
@@ -164,8 +174,8 @@ class Main extends Component {
               />
             </label>
             <br />
-            <label>
-              Important
+            <label className="importantCheckbox">
+              <span>Important:</span>{" "}
               <input
                 name="importantTask"
                 type="checkbox"
@@ -176,7 +186,17 @@ class Main extends Component {
           </div>
         </form>
         <div className="normalTasks">
-          <h3>Todo tasks</h3>
+          <h3>
+            Todo tasks
+            <select ref={this.sortingMethodNormal} onChange={this.handleChange}>
+              <option value="A-Z" selected>
+                A-Z
+              </option>
+              <option value="Z-A">Z-A</option>
+              <option value="New-old">New - old</option>
+              <option value="Old-new">Old - new</option>
+            </select>
+          </h3>
           <ul>
             <TaskList
               key="test"
@@ -184,11 +204,26 @@ class Main extends Component {
               tasks={this.state.tasks}
               finished={this.finishTaskHandle}
               deleted={this.deleteTaskHandle}
+              sort={this.sortingMethodNormal}
+              sortDirection={this.state.sortDirection}
             />
           </ul>
         </div>
         <div className="importantTasks">
-          <h3>important tasks</h3>
+          <h3>
+            Important tasks{" "}
+            <select
+              ref={this.sortingMethodImportant}
+              onChange={this.handleChange}
+            >
+              <option value="A-Z" selected>
+                A-Z
+              </option>
+              <option value="Z-A">Z-A</option>
+              <option value="New-old">New - old</option>
+              <option value="Old-new">Old - new</option>
+            </select>
+          </h3>
           <ul>
             <ImportantTaskList
               key="test2"
@@ -196,16 +231,33 @@ class Main extends Component {
               tasks={this.state.tasks}
               finished={this.finishTaskHandle}
               deleted={this.deleteTaskHandle}
+              sort={this.sortingMethodImportant}
+              sortDirection={this.state.sortDirection}
             />
           </ul>
         </div>
         <div className="finishedTasks">
-          <h3>Done tasks</h3>
+          <h3>
+            Finished tasks
+            <select
+              ref={this.sortingMethodFinished}
+              onChange={this.handleChange}
+            >
+              <option value="A-Z" selected>
+                A-Z
+              </option>
+              <option value="Z-A">Z-A</option>
+              <option value="New-old">New - old</option>
+              <option value="Old-new">Old - new</option>
+            </select>
+          </h3>
           <ul>
             <FinishedTasksList
               className="finishedTasksList"
               finishedTasks={this.state.finishedTasks}
               deleted={this.deleteTaskHandle}
+              sort={this.sortingMethodFinished}
+              sortDirection={this.state.sortDirection}
             />
           </ul>
         </div>
