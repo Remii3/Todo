@@ -1,4 +1,4 @@
-import "../styles/TaskList.css";
+import "../styles/TaskList.scss";
 
 const TaskList = (props) => {
   let obj = props.tasks.normalTasks;

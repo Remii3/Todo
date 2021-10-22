@@ -4,12 +4,12 @@
   box-sizing: border-box;
 }
 header h1 {
-  color: white;
+  color: hsl(0, 0%, 100%);
   font-size: 35px;
   margin-left: 15px;
   position: relative;
   display: block;
   transform: translateZ(150px);
   font-style: italic;
-  text-shadow: 3px 2px 1.5px gray;
+  text-shadow: 3px 2px 1.5px hsl(0, 0%, 50%);
 }

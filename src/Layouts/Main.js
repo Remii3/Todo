@@ -13,6 +13,7 @@ class Main extends Component {
     finishedTasks: [],
     importantTask: false,
     sortDirection: false,
+    dateCheck: false,
   };
 
   sortingMethodNormal = React.createRef();
@@ -33,13 +34,19 @@ class Main extends Component {
     } = this.state;
 
     e.preventDefault();
-
     const task = {
       id: currentId,
       title: currentTitle,
       description: currentDescription,
       date: currentDate,
     };
+    const date = new Date().toISOString().slice(0, 10);
+    if (currentDate.slice(0, 10) < date) {
+      this.setState({ dateCheck: true });
+      return;
+    } else {
+      this.setState({ dateCheck: false });
+    }
 
     if (importantTask === false) {
       this.setState((prevState) => ({
@@ -153,6 +160,7 @@ class Main extends Component {
                 name="currentTitle"
                 type="text"
                 onChange={this.handleChange}
+                required
               />
             </label>
             <br />
@@ -171,23 +179,31 @@ class Main extends Component {
                 name="currentDate"
                 type="datetime-local"
                 onChange={this.handleChange}
+                className="dateInput"
               />
             </label>
+            {this.state.dateCheck ? <br></br> : null}
+            {this.state.dateCheck ? (
+              <span style={{ color: "red", fontWeight: "bold" }}>
+                Too old date
+              </span>
+            ) : null}
             <br />
-            <label className="importantCheckbox">
+            <label>
               <span>Important:</span>{" "}
               <input
                 name="importantTask"
                 type="checkbox"
                 onChange={this.handleChange}
+                className="importantCheckbox"
               />
             </label>
             <button>Add</button>
           </div>
         </form>
         <div className="normalTasks">
-          <h3>
-            Todo tasks
+          <p>
+            <span>Todo tasks</span>
             <select ref={this.sortingMethodNormal} onChange={this.handleChange}>
               <option value="A-Z" selected>
                 A-Z
@@ -196,7 +212,7 @@ class Main extends Component {
               <option value="New-old">New - old</option>
               <option value="Old-new">Old - new</option>
             </select>
-          </h3>
+          </p>
           <ul>
             <TaskList
               key="test"
@@ -210,8 +226,8 @@ class Main extends Component {
           </ul>
         </div>
         <div className="importantTasks">
-          <h3>
-            Important tasks{" "}
+          <p>
+            <span>Important tasks</span>
             <select
               ref={this.sortingMethodImportant}
               onChange={this.handleChange}
@@ -223,7 +239,7 @@ class Main extends Component {
               <option value="New-old">New - old</option>
               <option value="Old-new">Old - new</option>
             </select>
-          </h3>
+          </p>
           <ul>
             <ImportantTaskList
               key="test2"
@@ -237,8 +253,8 @@ class Main extends Component {
           </ul>
         </div>
         <div className="finishedTasks">
-          <h3>
-            Finished tasks
+          <p>
+            <span>Finished tasks</span>
             <select
               ref={this.sortingMethodFinished}
               onChange={this.handleChange}
@@ -250,7 +266,7 @@ class Main extends Component {
               <option value="New-old">New - old</option>
               <option value="Old-new">Old - new</option>
             </select>
-          </h3>
+          </p>
           <ul>
             <FinishedTasksList
               className="finishedTasksList"

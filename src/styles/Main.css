@@ -1,9 +1,9 @@
-section {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 315px 600px;
-  align-items: center;
-  justify-items: center;
+.inputInfo {
+  height: 100%;
+  width: 100%;
+  background-color: #a7a78b;
+  border-radius: 10px;
+  text-align: center;
 }
 
 form {
@@ -11,96 +11,72 @@ form {
   width: 100%;
   grid-column-start: 2;
   grid-column-end: 3;
-  .inputInfo {
-    height: 100%;
-    width: 100%;
-    background-color: hsl(60, 14%, 60%);
-    border-radius: 10px;
-    text-align: center;
-    label {
-      width: 90%;
-      display: block;
-      text-align: left;
-      margin: 0 auto;
-      input {
-        float: right;
-        outline-width: 0;
-        border-width: 0;
-        height: 23px;
-        width: 50%;
-        border-radius: 3px;
-        cursor: pointer;
-      }
-      span {
-        font-size: 1.1rem;
-      }
-    }
-    input {
-      padding-left: 5px;
-    }
-  }
+}
+
+.inputInfo label {
+  width: 270px;
+  display: block;
+  text-align: left;
+  margin: 0 auto;
+}
+
+label input {
+  float: right;
+  outline-width: 0;
+  border-width: 0;
+  height: 23px;
+  border-radius: 3px;
+}
+
+label span {
+  font-size: 1.1rem;
 }
 
 .normalTasks {
   height: 90%;
   min-width: 250px;
   width: 90%;
-  background-color: hsl(55, 58%, 72%);
+  background-color: #e1da8e;
   overflow-y: scroll;
   border-radius: 10px;
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 2;
   grid-row-end: 3;
-  ul {
-    padding: 0 10px;
-  }
-  input {
-    font-size: 14px;
-  }
 }
 
 .importantTasks {
   height: 90%;
   min-width: 250px;
   width: 90%;
-  background-color: hsl(54, 62%, 79%);
+  background-color: #e3dd96;
   overflow-y: scroll;
   border-radius: 10px;
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 2;
   grid-row-end: 3;
-  ul {
-    padding: 0 10px;
-  }
-  input {
-    font-size: 14px;
-  }
 }
+
 .finishedTasks {
   height: 90%;
   min-width: 250px;
   width: 90%;
-  background-color: hsl(47, 37%, 83%);
+  background-color: #e4ddc4;
   overflow-y: scroll;
   border-radius: 10px;
   grid-column-start: 3;
   grid-column-end: 4;
   grid-row-start: 2;
   grid-row-end: 3;
-  ul {
-    padding: 0 10px;
-  }
-  input {
-    font-size: 14px;
-  }
 }
+
 p span {
   font-weight: bold;
   font-size: 20px;
   margin: 10px;
 }
+
 select {
   float: right;
   margin: 8px 10px;
@@ -109,29 +85,46 @@ select {
   outline-width: 0;
   border-radius: 5px;
 }
-@media (max-width: 960px) {
-  p span {
-    font-weight: bold;
-    font-size: 15px;
-    margin: 8px 2px;
-  }
+
+section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 315px 600px;
+  align-items: center;
+  justify-items: center;
 }
-@media (max-width: 800px) {
+
+.normalTasks ul {
+  padding: 0 10px;
+}
+
+input {
+  font-size: 14px;
+}
+
+.inputInfo input {
+  padding-left: 5px;
+}
+
+@media (max-width: 930px) {
   section {
     grid-template-columns: 1fr;
     grid-template-rows: 315px 300px 300px 300px;
   }
+
   form {
     width: 90%;
     grid-column-start: 1;
     grid-column-end: 4;
   }
+
   .normalTasks {
     grid-column-start: 1;
     grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 3;
   }
+
   .importantTasks {
     grid-column-start: 1;
     grid-column-end: 4;
@@ -139,10 +132,11 @@ select {
     grid-row-end: 4;
     padding: 0;
   }
+
   .finishedTasks {
     grid-column-start: 1;
     grid-column-end: 4;
     grid-row-start: 4;
     grid-row-end: 5;
   }
-}
+}/*# sourceMappingURL=Main.css.map */
