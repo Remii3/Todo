@@ -71,7 +71,7 @@ class Main extends Component {
     const name = e.target.name;
     if (name === "currentDate") {
       const date = e.target.value.slice(0, 10);
-      const time = e.target.value.slice(12);
+      const time = e.target.value.slice(11);
       const dateTime = date + " " + time;
       this.setState({ [name]: dateTime });
     } else {
