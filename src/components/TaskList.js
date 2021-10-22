@@ -39,7 +39,6 @@ const TaskList = (props) => {
       </>
     );
   });
-  console.log(props.tasks);
   return task;
 };
 const ImportantTaskList = (props) => {
@@ -85,7 +84,6 @@ const ImportantTaskList = (props) => {
       </>
     );
   });
-  console.log(props.tasks);
   return task;
 };
 

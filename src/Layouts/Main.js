@@ -213,17 +213,14 @@ class Main extends Component {
               <option value="Old-new">Old - new</option>
             </select>
           </p>
-          <ul>
-            <TaskList
-              key="test"
-              className="taskList"
-              tasks={this.state.tasks}
-              finished={this.finishTaskHandle}
-              deleted={this.deleteTaskHandle}
-              sort={this.sortingMethodNormal}
-              sortDirection={this.state.sortDirection}
-            />
-          </ul>
+          <TaskList
+            className="taskList"
+            tasks={this.state.tasks}
+            finished={this.finishTaskHandle}
+            deleted={this.deleteTaskHandle}
+            sort={this.sortingMethodNormal}
+            sortDirection={this.state.sortDirection}
+          />
         </div>
         <div className="importantTasks">
           <p>
@@ -240,17 +237,14 @@ class Main extends Component {
               <option value="Old-new">Old - new</option>
             </select>
           </p>
-          <ul>
-            <ImportantTaskList
-              key="test2"
-              className="importantTaskList"
-              tasks={this.state.tasks}
-              finished={this.finishTaskHandle}
-              deleted={this.deleteTaskHandle}
-              sort={this.sortingMethodImportant}
-              sortDirection={this.state.sortDirection}
-            />
-          </ul>
+          <ImportantTaskList
+            className="importantTaskList"
+            tasks={this.state.tasks}
+            finished={this.finishTaskHandle}
+            deleted={this.deleteTaskHandle}
+            sort={this.sortingMethodImportant}
+            sortDirection={this.state.sortDirection}
+          />
         </div>
         <div className="finishedTasks">
           <p>
@@ -267,15 +261,13 @@ class Main extends Component {
               <option value="Old-new">Old - new</option>
             </select>
           </p>
-          <ul>
-            <FinishedTasksList
-              className="finishedTasksList"
-              finishedTasks={this.state.finishedTasks}
-              deleted={this.deleteTaskHandle}
-              sort={this.sortingMethodFinished}
-              sortDirection={this.state.sortDirection}
-            />
-          </ul>
+          <FinishedTasksList
+            className="finishedTasksList"
+            finishedTasks={this.state.finishedTasks}
+            deleted={this.deleteTaskHandle}
+            sort={this.sortingMethodFinished}
+            sortDirection={this.state.sortDirection}
+          />
         </div>
       </section>
     );
