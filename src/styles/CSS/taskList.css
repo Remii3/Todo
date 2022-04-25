@@ -1,0 +1,66 @@
+.taskList_task {
+  list-style: none;
+  margin: 0 40px 0;
+  padding: 20px 10px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.45);
+}
+.taskList_task .task_title {
+  text-align: center;
+  margin: 0 auto;
+  font-size: 1.4rem;
+}
+.taskList_task .task_date {
+  text-align: center;
+  margin: 5px;
+  font-size: 1.2rem;
+}
+.taskList_task .task_description {
+  text-align: center;
+  margin: 5px auto;
+  word-break: break-all;
+  font-size: 1.1rem;
+}
+.taskList_task .task_buttonSpace {
+  display: flex;
+  justify-content: center;
+}
+.taskList_task .task_buttonSpace .buttonSpace_finishButton,
+.taskList_task .task_buttonSpace .buttonSpace_deleteButton {
+  display: block;
+  padding: 5px 15px;
+  border: none;
+  margin: 10px 10px;
+  background-color: transparent;
+  background-color: hsl(0deg, 0%, 100%);
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+  width: 85px;
+}
+.taskList_task .task_buttonSpace .buttonSpace_finishButton:hover,
+.taskList_task .task_buttonSpace .buttonSpace_deleteButton:hover {
+  -webkit-animation: hoverButtonEffect 0.5s both;
+          animation: hoverButtonEffect 0.5s both;
+}
+
+@-webkit-keyframes hoverButtonEffect {
+  0% {
+    background-color: #fff;
+    color: hsl(0deg, 0%, 0%);
+  }
+  100% {
+    background-color: hsl(0deg, 0%, 0%);
+    color: hsl(0deg, 0%, 100%);
+  }
+}
+
+@keyframes hoverButtonEffect {
+  0% {
+    background-color: #fff;
+    color: hsl(0deg, 0%, 0%);
+  }
+  100% {
+    background-color: hsl(0deg, 0%, 0%);
+    color: hsl(0deg, 0%, 100%);
+  }
+}/*# sourceMappingURL=taskList.css.map */

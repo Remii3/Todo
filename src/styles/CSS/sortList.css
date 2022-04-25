@@ -1,0 +1,12 @@
+.sortList {
+  float: right;
+  cursor: pointer;
+  border: none;
+  outline-width: 0;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+}
+
+.sortList:hover {
+  border-radius: 5px 5px 0 0;
+}/*# sourceMappingURL=sortList.css.map */

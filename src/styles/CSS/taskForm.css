@@ -1,0 +1,83 @@
+.taskFormSpace {
+  width: 100%;
+  max-width: 552px;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  margin: 2rem auto;
+}
+.taskFormSpace .taskFormSpace_taskForm {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem;
+  background-color: hsl(60deg, 14%, 60%);
+  border-radius: 10px;
+}
+.taskFormSpace .taskFormSpace_taskForm .taskForm_title {
+  text-align: center;
+  padding-bottom: 0.5rem;
+}
+.taskFormSpace .taskFormSpace_taskForm .taskForm_informationSpace {
+  font-size: 1.1rem;
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.taskFormSpace .taskFormSpace_taskForm .taskForm_informationSpace .informationSpace_input {
+  padding: 0.25rem 0.5rem;
+  outline-width: 0;
+  border-width: 0;
+  width: 100%;
+  font-size: inherit;
+  border-radius: 5px;
+  resize: none;
+  transition: all 0.2s ease;
+}
+.taskFormSpace .taskFormSpace_taskForm .taskForm_informationSpace .informationSpace_input-date {
+  cursor: pointer;
+  font-family: sans-serif;
+}
+.taskFormSpace .taskFormSpace_taskForm .taskForm_informationSpace .informationSpace_input-date::-webkit-calendar-picker-indicator {
+  opacity: 0.5;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.taskFormSpace .taskFormSpace_taskForm .taskForm_informationSpace .informationSpace_input-date::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+.taskFormSpace .taskFormSpace_taskForm .taskForm_informationSpace .informationSpace_input-importantCheckbox {
+  width: auto;
+  transform: scale(1.5);
+  cursor: pointer;
+  margin-right: 3px;
+}
+.taskFormSpace .taskFormSpace_taskForm .taskForm_informationSpace .informationSpace_input:hover {
+  background-color: hsl(0deg, 0%, 80%);
+}
+@media screen and (min-width: 600px) {
+  .taskFormSpace .taskFormSpace_taskForm .taskForm_informationSpace {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+.taskFormSpace .taskFormSpace_taskForm .taskForm_buttonSpace {
+  padding-top: 1rem;
+}
+.taskFormSpace .taskFormSpace_taskForm .taskForm_buttonSpace .buttonSpace_button {
+  padding: 0.4rem 0.8rem;
+  float: right;
+  border: none;
+  font-size: 1.1rem;
+  background-color: hsl(0deg, 0%, 100%);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.taskFormSpace .taskFormSpace_taskForm .taskForm_buttonSpace .buttonSpace_button:hover {
+  background-color: hsl(0deg, 0%, 80%);
+}/*# sourceMappingURL=taskForm.css.map */

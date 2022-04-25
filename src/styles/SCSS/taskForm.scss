@@ -1,0 +1,90 @@
+.taskFormSpace {
+  width: 100%;
+  max-width: 552px;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  margin: 2rem auto;
+
+  .taskFormSpace_taskForm {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 2rem;
+    background-color: hsl(60, 14%, 60%);
+    border-radius: 10px;
+
+    .taskForm_title {
+      text-align: center;
+      padding-bottom: 0.5rem;
+    }
+
+    .taskForm_informationSpace {
+      font-size: 1.1rem;
+      padding: 0.5rem 0;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      .informationSpace_input {
+        padding: 0.25rem 0.5rem;
+        outline-width: 0;
+        border-width: 0;
+        width: 100%;
+        font-size: inherit;
+        border-radius: 5px;
+        resize: none;
+        transition: all 0.2s ease;
+      }
+      .informationSpace_input-date {
+        cursor: pointer;
+        font-family: sans-serif;
+      }
+      .informationSpace_input-date::-webkit-calendar-picker-indicator {
+        opacity: 0.5;
+        width: 20px;
+        height: 20px;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .informationSpace_input-date::-webkit-calendar-picker-indicator:hover {
+        opacity: 1;
+      }
+      .informationSpace_input-importantCheckbox {
+        width: auto;
+        transform: scale(1.5);
+        cursor: pointer;
+        margin-right: 3px;
+      }
+      .informationSpace_input:hover {
+        background-color: hsl(0, 0%, 80%);
+      }
+    }
+    .taskForm_errorMessage {
+      color: #f00;
+      font-weight: bold;
+    }
+    @media screen and (min-width: 600px) {
+      .taskForm_informationSpace {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+    }
+    .taskForm_buttonSpace {
+      padding-top: 1rem;
+      .buttonSpace_button {
+        padding: 0.4rem 0.8rem;
+        float: right;
+        border: none;
+        font-size: 1.1rem;
+        background-color: hsl(0, 0%, 100%);
+        border-radius: 2px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .buttonSpace_button:hover {
+        background-color: hsl(0, 0%, 80%);
+      }
+    }
+  }
+}
