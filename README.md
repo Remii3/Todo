@@ -1,4 +1,4 @@
-### How to start
+# How to start
 
     - "npm i" to install dependencies
     - "npm start" to start the project
