@@ -7,72 +7,89 @@ import Main from "./components/Layout/Main";
 import "./styles/SCSS/app.scss";
 
 const App = () => {
-  const [tasks, setTasks] = useState({ normalTasks: [], importantTasks: [] });
-  const [finishedTasks, setFinishedTasks] = useState({ finishedTasks: [] });
+  const [tasks, setTasks] = useState({
+    normalTasks: [],
+    importantTasks: [],
+    finishedTasks: [],
+  });
+
+  const TASK_TYPES = {
+    normal: "NORMAL",
+    important: "IMPORTANT",
+    finished: "FINISHED",
+  };
 
   const finishTaskHandle = (id, recognizer) => {
-    if (recognizer === "FinishedNormalTask") {
+    if (recognizer === TASK_TYPES.normal) {
       const clickedTask = tasks.normalTasks.findIndex((x) => x.id === id);
 
-      finishedTasks.finishedTasks.push(tasks.normalTasks[clickedTask]);
-
-      setFinishedTasks((prevState) => ({
-        finishedTasks: [...prevState.finishedTasks],
-      }));
-
+      tasks.finishedTasks.push(tasks.normalTasks[clickedTask]);
       tasks.normalTasks.splice(clickedTask, 1);
 
       setTasks((prevState) => ({
         normalTasks: [...tasks.normalTasks],
         importantTasks: [...prevState.importantTasks],
-      }));
-    } else {
-      const clickedTask = tasks.importantTasks.findIndex((x) => x.id === id);
-
-      finishedTasks.finishedTasks.push(tasks.importantTasks[clickedTask]);
-
-      setFinishedTasks((prevState) => ({
         finishedTasks: [...prevState.finishedTasks],
       }));
+    } else if (recognizer === TASK_TYPES.important) {
+      const clickedTask = tasks.importantTasks.findIndex((x) => x.id === id);
 
+      tasks.finishedTasks.push(tasks.importantTasks[clickedTask]);
       tasks.importantTasks.splice(clickedTask, 1);
 
       setTasks((prevState) => ({
         normalTasks: [...prevState.normalTasks],
         importantTasks: [...tasks.importantTasks],
+        finishedTasks: [...prevState.finishedTasks],
       }));
     }
   };
 
   const deleteTaskHandle = (id, recognizer) => {
-    if (recognizer === "finished") {
-      const clickedTask = finishedTasks.finishedTasks.findIndex(
-        (x) => x.id === id
-      );
+    let clickedTask;
+    switch (recognizer) {
+      case TASK_TYPES.finished:
+        clickedTask = tasks.finishedTasks.findIndex((x) => x.id === id);
 
-      finishedTasks.finishedTasks.splice(clickedTask, 1);
+        tasks.finishedTasks.splice(clickedTask, 1);
 
-      setFinishedTasks((prevState) => ({
-        finishedTasks: [...prevState.finishedTasks],
-      }));
-    } else if (recognizer === "notFinishedNormalTask") {
-      const clickedTask = tasks.normalTasks.findIndex((x) => x.id === id);
+        setTasks((prevState) => ({
+          normalTasks: [...tasks.normalTasks],
+          importantTasks: [...prevState.importantTasks],
+          finishedTasks: [...prevState.finishedTasks],
+        }));
+        break;
 
-      tasks.normalTasks.splice(clickedTask, 1);
+      case TASK_TYPES.normal:
+        clickedTask = tasks.normalTasks.findIndex((x) => x.id === id);
 
-      setTasks((prevState) => ({
-        normalTasks: [...tasks.normalTasks],
-        importantTasks: [...prevState.importantTasks],
-      }));
-    } else {
-      const clickedTask = tasks.importantTasks.findIndex((x) => x.id === id);
+        tasks.normalTasks.splice(clickedTask, 1);
 
-      tasks.importantTasks.splice(clickedTask, 1);
+        setTasks((prevState) => ({
+          normalTasks: [...tasks.normalTasks],
+          importantTasks: [...prevState.importantTasks],
+          finishedTasks: [...prevState.finishedTasks],
+        }));
+        break;
 
-      setTasks((prevState) => ({
-        normalTasks: [...prevState.normalTasks],
-        importantTasks: [...tasks.importantTasks],
-      }));
+      case TASK_TYPES.important:
+        clickedTask = tasks.importantTasks.findIndex((x) => x.id === id);
+
+        tasks.importantTasks.splice(clickedTask, 1);
+
+        setTasks((prevState) => ({
+          normalTasks: [...prevState.normalTasks],
+          importantTasks: [...tasks.importantTasks],
+          finishedTasks: [...prevState.finishedTasks],
+        }));
+        break;
+      default:
+        setTasks((prevState) => ({
+          normalTasks: [...prevState.normalTasks],
+          importantTasks: [...prevState.importantTasks],
+          finishedTasks: [...prevState.finishedTasks],
+        }));
+        break;
     }
   };
 
@@ -81,11 +98,13 @@ const App = () => {
       setTasks((prevState) => ({
         normalTasks: [...tasks.normalTasks, newTask],
         importantTasks: [...prevState.importantTasks],
+        finishedTasks: [...prevState.finishedTasks],
       }));
     } else if (importance === true) {
       setTasks((prevState) => ({
         normalTasks: [...prevState.normalTasks],
         importantTasks: [...tasks.importantTasks, newTask],
+        finishedTasks: [...prevState.finishedTasks],
       }));
     }
   };
@@ -94,8 +113,8 @@ const App = () => {
     <div className="wrapper">
       <Header />
       <Main
+        taskTypes={TASK_TYPES}
         tasks={tasks}
-        finishedTasks={finishedTasks}
         finishTaskHandle={finishTaskHandle}
         deleteTaskHandle={deleteTaskHandle}
         addTaskHandler={addTaskHandler}

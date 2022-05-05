@@ -1,20 +1,18 @@
+import { useEffect, useRef, useState } from "react";
+
 import "../../styles/SCSS/main.scss";
-import TaskList from "../Tasks/TaskList/TaskList";
-import ImportantTaskList from "../Tasks/TaskList/ImportantTaskList";
-import FinishedTasksList from "../Tasks/TaskList/FinishedTasksList";
-import { useEffect } from "react";
-import { useRef } from "react";
-import { useState } from "react";
-import SortList from "../UI/SortList";
+
 import TaskFormFunctionality from "../Tasks/TaskForm/TaskFormFunctionality";
+import TaskList from "../Tasks/TaskList/TaskList";
+import SortList from "../UI/SortList";
 
 const Main = (props) => {
   const {
     tasks,
-    finishedTasks,
     finishTaskHandle,
     deleteTaskHandle,
     addTaskHandler,
+    taskTypes,
   } = props;
 
   const [sortDirection, setSortDirection] = useState(false);
@@ -46,6 +44,7 @@ const Main = (props) => {
         <div className="taskSpace_taskListSpace">
           <ul className="taskListSpace_taskList">
             <TaskList
+              type={taskTypes.normal}
               tasks={tasks}
               finished={finishTaskHandle}
               deleted={deleteTaskHandle}
@@ -65,7 +64,8 @@ const Main = (props) => {
         </div>
         <div className="taskSpace_taskListSpace">
           <ul className="taskListSpace_taskList">
-            <ImportantTaskList
+            <TaskList
+              type={taskTypes.important}
               tasks={tasks}
               finished={finishTaskHandle}
               deleted={deleteTaskHandle}
@@ -85,8 +85,9 @@ const Main = (props) => {
         </div>
         <div className="taskSpace_taskListSpace">
           <ul className="taskListSpace_taskList">
-            <FinishedTasksList
-              finishedTasks={finishedTasks}
+            <TaskList
+              type={taskTypes.finished}
+              tasks={tasks}
               deleted={deleteTaskHandle}
               sort={sortingMethodFinished}
               sortDirection={sortDirection}
