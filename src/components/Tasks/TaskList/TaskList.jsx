@@ -14,7 +14,7 @@ const TaskList = (props) => {
 
   const sortedTasks = sortTasks(sortDirection, taskList, sort);
 
-  const task = sortedTasks.map((item) => {
+  return sortedTasks.map((item) => {
     return (
       <li key={type.slice(0, 3) + item.id} className="taskList_task">
         <h4 className="task_title">{item.title}</h4>
@@ -42,7 +42,6 @@ const TaskList = (props) => {
       </li>
     );
   });
-  return task;
 };
 
 export default TaskList;
